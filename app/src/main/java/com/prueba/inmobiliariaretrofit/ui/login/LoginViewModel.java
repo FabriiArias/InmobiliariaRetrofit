@@ -3,6 +3,7 @@ package com.prueba.inmobiliariaretrofit.ui.login;
 import android.app.Application;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -68,6 +69,7 @@ public class LoginViewModel extends AndroidViewModel {
                 }else{
                     Log.d("token", response.message());
                     Log.d("token", response.code() + "");
+                    Toast.makeText(getApplication(), "CREDENCIALES INCORRECTAS", Toast.LENGTH_SHORT).show();
                 }
 
 
