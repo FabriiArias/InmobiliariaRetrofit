@@ -20,61 +20,69 @@ import com.prueba.inmobiliariaretrofit.request.ApiClient;
 
 import java.util.List;
 
-public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.viewHolderInmueble> {
-    private Context context;
-    private List<Inmueble> listado;
-    private LayoutInflater li;
+public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHolderInmueble> {
 
-    public InmuebleAdapter(Context context, List<Inmueble> listado, LayoutInflater li) {
+
+    private List<Inmueble> listaInmuebles;
+    private Context context;
+    private LayoutInflater inflater;
+
+
+    public InmuebleAdapter(List<Inmueble> listaInmuebles, Context context, LayoutInflater inflater) {
+
+        this.listaInmuebles = listaInmuebles;
+        this.listaInmuebles.sort((o1, o2) -> o2.getIdInmueble() - o1.getIdInmueble());
         this.context = context;
-        this.listado = listado;
-        this.li = li;
+        this.inflater = inflater;
+
     }
 
     @NonNull
     @Override
-    public viewHolderInmueble onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = li.inflate(R.layout.item_inmueble, parent, false);
-        return new viewHolderInmueble(itemView);
+    public ViewHolderInmueble onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = inflater.inflate(R.layout.item_inmueble, parent, false);
+        return new ViewHolderInmueble(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull viewHolderInmueble holder, int position) {
-        Inmueble inmuebleActual = listado.get(position);
-        holder.direccion.setText("Dirección: " + inmuebleActual.getDireccion());
-        holder.precio.setText("Valor: " + inmuebleActual.getValor());
+    public void onBindViewHolder(@NonNull ViewHolderInmueble holder, int position) {
+        Inmueble inmActual = listaInmuebles.get(position);
+        holder.direccion.setText(inmActual.getDireccion());
+        holder.precio.setText(inmActual.getValor() + "");
+        holder.ambientes.setText("ambientes:" + inmActual.getAmbientes());
         Glide.with(context)
-                .load(ApiClient.getBaseUrl() + inmuebleActual.getImagen())
-                //.placeholder(R.drawable.)
+                .load("https://inmobiliariaulp-amb5hwfqaraweyga.canadacentral-01.azurewebsites.net/" + inmActual.getImagen())
+                .placeholder(null)
                 .error("null")
-                .into(holder.imagen);
-        ((viewHolderInmueble) holder).itemView.setOnClickListener(new View.OnClickListener() {
+                .into(holder.portada);
+        ((ViewHolderInmueble) holder).itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("inmuebleBundle", inmuebleActual);
-                //Navigation.findNavController((Activity)context, R.id.nav_host_fragment_content_main).navigate(R.id.detalleInmueble, bundle);
-
+                bundle.putSerializable("inmueble", inmActual);
+                Navigation.findNavController((Activity) context, R.id.nav_host_fragment_content_main).navigate(R.id.detalleInmueble, bundle);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return listado.size();
+        return listaInmuebles.size();
     }
 
-    public class viewHolderInmueble extends RecyclerView.ViewHolder {
+    public class ViewHolderInmueble extends RecyclerView.ViewHolder {
 
-        TextView direccion, precio;
-        ImageView imagen;
+        private TextView direccion, precio, ambientes;
+        private ImageView portada;
 
-        public viewHolderInmueble(@NonNull View itemView) {
+        public ViewHolderInmueble(@NonNull View itemView) {
             super(itemView);
             direccion = itemView.findViewById(R.id.tvDireccion);
             precio = itemView.findViewById(R.id.tvPrecio);
-            imagen = itemView.findViewById(R.id.imageView);
+            portada = itemView.findViewById(R.id.imgInmueble);
+            ambientes = itemView.findViewById(R.id.tvAmbientes);
         }
+
+
     }
 }
-

@@ -11,7 +11,7 @@ public class Inmueble implements Serializable {
     private int superficie;
     private double latitud;
     private double valor;
-    private int imagen;
+    private String imagen;
     private boolean disponible;
     private double longitud;
     private int idPropietario;
@@ -20,7 +20,7 @@ public class Inmueble implements Serializable {
     public Inmueble() {
     }
 
-    public Inmueble(int idInmueble, String uso, String direccion, String tipo, int ambientes, int superficie, double latitud, double valor, int imagen, boolean disponible, double longitud, int idPropietario, Propietario duenio) {
+    public Inmueble(int idInmueble, String uso, String direccion, String tipo, int ambientes, int superficie, double latitud, double valor, String imagen, boolean disponible, double longitud, int idPropietario, Propietario duenio) {
         this.idInmueble = idInmueble;
         this.uso = uso;
         this.direccion = direccion;
@@ -100,11 +100,11 @@ public class Inmueble implements Serializable {
         this.valor = valor;
     }
 
-    public int getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(int imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 

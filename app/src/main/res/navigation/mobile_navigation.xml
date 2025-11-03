@@ -17,11 +17,10 @@
         android:label="@string/perfil"
         tools:layout="@layout/fragment_perfil" />
 
-    <fragment
-        android:id="@+id/nav_inmueble"
-        android:name="com.prueba.inmobiliariaretrofit.ui.inmuebles.InmueblesFragment"
-        android:label="@string/inmueble"
-        tools:layout="@layout/fragment_inmuebles" />
+
+
+
+
 
     <fragment
         android:id="@+id/nav_inquilino"
@@ -40,4 +39,38 @@
         android:name="com.prueba.inmobiliariaretrofit.ui.logout.LogoutFragment"
         android:label="@string/logout"
         tools:layout="@layout/fragment_logout" />
+
+    <fragment
+        android:id="@+id/nav_inmueble"
+        android:name="com.prueba.inmobiliariaretrofit.ui.inmuebles.InmuebleFragment"
+        android:label="@string/inmueble"
+        tools:layout="@layout/fragment_inmueble" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/detalleInmueble"
+        android:name="com.prueba.inmobiliariaretrofit.ui.inmuebles.DetalleInmueble"
+        android:label="Detalle Inmueble"
+        tools:layout="@layout/fragment_detalle_inmueble" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_agregarInmueble"
+        android:name="com.prueba.inmobiliariaretrofit.ui.inmuebles.crear.CrearInmuebleFragment"
+        android:label="Agregar Inmueble"
+        tools:layout="@layout/fragment_crear_inmueble">
+    </fragment>
+
+    <!--
+    <fragment
+        android:id="@+id/crearInmuebleFragment"
+        android:name="com.prueba.inmobiliariaretrofit.ui.inmuebles.CrearInmuebleFragment"
+        android:label="Crear Inmueble"
+        tools:layout="@layout/fragment_crear_inmueble" />
+    -->
+
+
+
 </navigation>

@@ -11,6 +11,8 @@ import com.prueba.inmobiliariaretrofit.modelo.Propietario;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -25,7 +27,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Part;
 
 public class ApiClient {
-    private static final String BASE_URL = "https://inmobiliariaulp-amb5hwfqaraweyga.canadacentral-01.azurewebsites.net/";
+    public final static String BASE_URL = "https://inmobiliariaulp-amb5hwfqaraweyga.canadacentral-01.azurewebsites.net/";
     // que siempre termine con la /
 
     // no se si esto es correcto pero me llora el adapter al acceder a la url ya que es private
@@ -79,11 +81,11 @@ public class ApiClient {
 
         @Multipart
         @POST("api/Inmuebles/cargar")
-        Call<Inmueble> cargarInmueble(
-                @Header("Authorization") String token,
-                @Part okhttp3.MultipartBody.Part imagen,
-                @Part("inmueble") okhttp3.RequestBody inmuebleJson
-        );
+        Call<Inmueble> CargarInmueble(@Header("Authorization") String token,
+                                      @Part MultipartBody.Part imagen,
+                                      @Part("inmueble") RequestBody inmuebleBody);
+
+
     }
 
 }
